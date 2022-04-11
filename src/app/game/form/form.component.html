@@ -1,0 +1,47 @@
+<form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="name">Name</label>
+        <input id="name" type="text" formControlName="name"/>
+    </div>
+
+    <div>
+        <label for="developers">Developers</label>
+        <select name="numOfDevs" id="numOfDevs">
+            <option (devs)="1">1</option>
+            <option (devs)="2">2</option>
+            <option (devs)="3">3</option>
+            <option (devs)="4">4</option>
+            <option (devs)="5">5</option>
+            <option (devs)="6">6</option>
+            <option (devs)="7">7</option>
+            <option (devs)="8">8</option>
+            <option (devs)="9">9</option>
+            <option (devs)="10">10</option>
+        </select>
+
+        <div *ngFor="devs">
+            <input id="developers" type="text" formControlName="developers"/>
+        </div>
+    </div>
+
+    <div>
+        <label for="publishers">Publishers</label>
+        <select name="numOfPubs" id="numOfPubs">
+            <option (pubs)="1">1</option>
+            <option (pubs)="2">2</option>
+            <option (pubs)="3">3</option>
+            <option (pubs)="4">4</option>
+            <option (pubs)="5">5</option>
+            <option (pubs)="6">6</option>
+            <option (pubs)="7">7</option>
+            <option (pubs)="8">8</option>
+            <option (pubs)="9">9</option>
+            <option (pubs)="10">10</option>
+        </select>
+
+        <div *ngFor="pubs">
+            <input id="publishers" type="text" formControlName="publishers"/>
+        </div>
+    </div>
+    <button type="submit"></button>
+</form>

@@ -1,0 +1,24 @@
+<ol>
+    <li *ngFor="let g of games">
+        <!--A table that has the game name on the left and developers, publishers and description on the right-->
+        <table>
+            <tr>
+                <td>
+                    <h3>{{g.name}}</h3>
+                </td>
+                <td>
+                    <h4>Developers:</h4>
+                    <ul>
+                        <li *ngFor="let d of g.developers">{{d}}</li>
+                    </ul>
+                    <h4>Publishers:</h4>
+                    <ul>
+                        <li *ngFor="let p of g.publishers">{{p}}</li>
+                    </ul>
+                    <h4>Description:</h4>
+                    <p>{{g.description}}</p>
+                </td>
+            </tr>
+        </table>
+    </li>
+</ol>
