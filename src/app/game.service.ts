@@ -1,28 +1,51 @@
-import { Injectable, ComponentFactoryResolver } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Game } from './game';
+import { catchError, Observable, of, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map, tap } from 'rxjs/operators';
 
-import { Observable, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  constructor() { }
+  private gamesUrl = 'http://localhost:3000/games';
 
-  private dummyData: Game[] = [{
-    "_id": "62548f4672eb07bfd86be747",
-    "name": "Terraria",
-    "developers": [
-      "Re-Logic"
-    ],
-    "publishers": [
-      "505Games"
-    ],
-    "description": "Terraria is an action-adventure sandbox game developed by Re-Logic. The game was first released for Microsoft Windows on May 16, 2011, and has since been ported to several other platforms. The game features exploration, crafting, building, painting, and combat with a variety of creatures in a procedurally generated 2D world.",
-  }];
+  constructor(private http: HttpClient) { }
 
-  getGames(): Observable<Game[]> {
-    return of(this.dummyData);
+  addGame(game: Game): Observable<Game>{
+    return this.http.post<Game>(this.gamesUrl, game).pipe(catchError(this.handlError));
   }
+
+  updateGame(id: string, game: Game): Observable<Game>{
+    return this.http.put<Game>(`${this.gamesUrl}/${id}`, game).pipe(catchError(this.handlError));
+  }
+
+  getGame(id: string): Observable<Game>{
+    return this.http.get<Game>(`${this.gamesUrl}/${id}`).pipe(catchError(this.handlError));
+  }
+
+  getGames(): Observable<Game[]>{
+    return this.http.get<Game[]>(this.gamesUrl).pipe(catchError(this.handlError));
+  }
+
+  deleteGame(id: string): Observable<Game>{
+    return this.http.delete<Game>(`${this.gamesUrl}/${id}`).pipe(catchError(this.handlError));
+  }
+
+  private handlError(error: any) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    }
+    else {
+      console.error(`Backend returned code ${error.status}, ` + `body was: ${JSON.stringify(error.error)}`);
+      
+      if (error.status == 412) {
+        return throwError('412 Error' + JSON.stringify(error.error))
+      }
+    }
+    return throwError('Something bad happened; please try again later.');
+  }
+
 }

@@ -1,47 +1,25 @@
-<form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
-    <div>
+<!--a form that gets the data for name, developer, publisher, description and an image while inside a table-->
+ <form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
         <label for="name">Name</label>
-        <input id="name" type="text" formControlName="name"/>
+        <input type="text" class="form-control" id="name" name="name" ngModel>
     </div>
-
-    <div>
-        <label for="developers">Developers</label>
-        <select name="numOfDevs" id="numOfDevs">
-            <option (devs)="1">1</option>
-            <option (devs)="2">2</option>
-            <option (devs)="3">3</option>
-            <option (devs)="4">4</option>
-            <option (devs)="5">5</option>
-            <option (devs)="6">6</option>
-            <option (devs)="7">7</option>
-            <option (devs)="8">8</option>
-            <option (devs)="9">9</option>
-            <option (devs)="10">10</option>
-        </select>
-
-        <div *ngFor="devs">
-            <input id="developers" type="text" formControlName="developers"/>
-        </div>
+    <div class="form-group">
+        <label for="developer">Developer</label>
+        <input type="text" class="form-control" id="developer" name="developer" ngModel>
     </div>
-
-    <div>
-        <label for="publishers">Publishers</label>
-        <select name="numOfPubs" id="numOfPubs">
-            <option (pubs)="1">1</option>
-            <option (pubs)="2">2</option>
-            <option (pubs)="3">3</option>
-            <option (pubs)="4">4</option>
-            <option (pubs)="5">5</option>
-            <option (pubs)="6">6</option>
-            <option (pubs)="7">7</option>
-            <option (pubs)="8">8</option>
-            <option (pubs)="9">9</option>
-            <option (pubs)="10">10</option>
-        </select>
-
-        <div *ngFor="pubs">
-            <input id="publishers" type="text" formControlName="publishers"/>
-        </div>
+    <div class="form-group">
+        <label for="publisher">Publisher</label>
+        <input type="text" class="form-control" id="publisher" name="publisher" ngModel>
     </div>
-    <button type="submit"></button>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" name="description" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="image">Image</label>
+        <input type="url" class="form-control" id="image" name="image" ngModel>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
